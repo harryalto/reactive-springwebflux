@@ -43,3 +43,5 @@ This is the db.json file used
 }
 
 ```
+
+Some other stuff which i find useful are "HTTPie" cli : https://httpie.io/cli. I find it easier when doing simple stuff than curl on cli.
