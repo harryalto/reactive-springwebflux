@@ -11,6 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -46,14 +47,15 @@ public class ProjectHandler {
     public Flux<Project> getProjectsWithTeamMembers() {
         return getAllProjects()
                 .flatMap(project ->
-                        Mono.zip(Mono.just(project), getTeamMembers(project.getProjectId()))
-                                .map(tuple -> {
-                                    log.info("data" + tuple.getT2().size());
-                                    return Project.builder().projectId(tuple.getT1().getProjectId())
-                                            .projectName(tuple.getT1().getProjectName())
-                                            .projectDesc(tuple.getT1().getProjectDesc())
-                                            .teamMemberList(tuple.getT2()).build();
-                                }));
+                        Mono.zip(Mono.just(project),
+                                getTeamMembers(project.getProjectId()).defaultIfEmpty(new ArrayList<TeamMember>()))
+                .map(tuple -> {
+                    log.info("data" + tuple.getT2().size());
+                    return Project.builder().projectId(tuple.getT1().getProjectId())
+                            .projectName(tuple.getT1().getProjectName())
+                            .projectDesc(tuple.getT1().getProjectDesc())
+                            .teamMemberList(tuple.getT2()).build();
+                }));
 
     }
 }
