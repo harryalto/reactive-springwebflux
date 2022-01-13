@@ -15,6 +15,9 @@ spring:
     host: localhost
     port: 27017
     database: local
+clients:
+  family:
+    url: http://localhost:3000
 ---
 spring:
   profiles: prod

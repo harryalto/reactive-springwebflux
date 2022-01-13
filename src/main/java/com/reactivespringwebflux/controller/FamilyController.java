@@ -5,11 +5,10 @@ import com.reactivespringwebflux.handler.FamilyHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
 
 import static com.reactivespringwebflux.constants.EmployeeConstants.FAMILIES_ENDPOINT_V1;
 
@@ -23,6 +22,11 @@ public class FamilyController {
     @GetMapping(FAMILIES_ENDPOINT_V1)
     public Flux<Parent> viewAllParents() {
         return familyHandler.getFamiliesHierarchy();
+    }
+
+    @GetMapping(FAMILIES_ENDPOINT_V1 + "/{id}")
+    public Mono<Parent> getParent(@PathVariable String id) {
+        return familyHandler.getSingleParentHierarchy(Integer.valueOf(id));
     }
 
 }

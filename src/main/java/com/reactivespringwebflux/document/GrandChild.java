@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class GrandChild {
     private Integer id;
     private Integer childId;
-    private String name;
+    private String projectName;
     private String path;
 }
 

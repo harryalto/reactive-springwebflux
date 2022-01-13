@@ -14,7 +14,7 @@ import java.util.List;
 public class Child {
     private Integer id;
     private Integer parentId;
-    private String name;
+    private String projectName;
     private String path;
     private List<GrandChild> grandChildren;
 }
