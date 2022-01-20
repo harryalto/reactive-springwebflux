@@ -22,7 +22,7 @@ public class ProfileUserHandler {
     @Autowired
     private WebClient webClient;
 
-    ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     public Flux<UserModel> getBulkUsers(int[] ids) {
         List<Integer> list = Arrays.stream(ids).boxed().collect(Collectors.toList());
